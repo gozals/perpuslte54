@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AuthorController extends Controller
 {
@@ -13,7 +15,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::paginate(10);
+
+        return view('authors.index')->with('authors', $authors);
     }
 
     /**
@@ -23,7 +27,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('authors.create');
     }
 
     /**
@@ -34,7 +38,30 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = [
+            'name.required' => 'Isi dooonk',
+            'name.unique' => 'Bedain dooonk',
+            'name.min' => 'Tambahin dooonk',
+        ];
+        $rules = [
+            'name' => 'required|unique:authors|min:3'
+        ];
+
+        $this->validate($request, $rules, $message);
+
+        $author = New Author();
+        $author->name = $request->input('name');
+        $author->save();
+
+//        $author = Author::create($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Berhasil menyimpan $author->name"
+        ]);
+
+        return redirect()->route('authors.index');
+//        return redirect()->to('authors');
     }
 
     /**
@@ -56,7 +83,9 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $author = Author::find($id);
+        return view('authors.edit')->with('author', $author);
+
     }
 
     /**
@@ -68,7 +97,18 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, ['name' => 'required|unique:authors,name,'. $id]);
+
+        $author = Author::find($id);
+        $author->name = $request->input('name');
+        $author->save();
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Berhasil mengupdate $author->name"
+        ]);
+
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -79,6 +119,13 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(!Author::destroy($id)) return redirect()->back();
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Penulis berhasil dihapus"
+        ]);
+
+        return redirect()->route('authors.index');
     }
 }
