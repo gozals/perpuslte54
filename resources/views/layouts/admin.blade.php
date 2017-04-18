@@ -41,7 +41,15 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-
+          <ul class="nav navbar-nav">
+            @if (Auth::check())
+              <li><a href="{{url('/home')}}">Dashboard</a></li>
+              <li><a href="{{route('authors.index')}}">Penulis</a></li>
+              <li><a href="">Buku</a></li>
+              <li><a href="">Member</a></li>
+              <li><a href="">Peminjaman</a></li>
+            @endif
+          </ul>
         </div>
         <!-- /.navbar-collapse -->
         <!-- Navbar Right Menu -->
