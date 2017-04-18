@@ -178,7 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
-
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
 
     ],
 
