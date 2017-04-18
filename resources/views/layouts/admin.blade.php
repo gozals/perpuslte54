@@ -113,6 +113,8 @@
 
       <!-- Main content -->
       <section class="content">
+          @include('layouts._flash')
+
           @yield('content')
       </section>
       <!-- /.content -->
