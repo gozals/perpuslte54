@@ -10,6 +10,42 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/test', function () {
+//    $authors = \App\Models\Author::all();
+
+//    foreach($authors as $author){
+//        echo $author->name;
+//    }
+//    exit;
+//    dd($authors->toArray());
+
+//    $author = \App\Models\Author::find(1);
+//    $author = \App\Models\Author::where('id', 1)->first();
+//    $author = \Illuminate\Support\Facades\DB::table('users')
+//                ->where('id', 1)
+//                ->first();
+////    dd($author->name);
+//    dd($author);
+
+//    $author = new \App\Models\Author();
+//    $author->name = 'Budi';
+//    $author->save();
+
+//    \App\Models\Author::create(['name' => 'BUDI']);
+
+//    $author = \App\Models\Author::firstOrNew(['name'=>'BUDI']);
+//    $author->save();
+
+//    $author = \App\Models\Author::find(1);
+//    $author->name = 'budi';
+//    $author->save();
+
+//    $author = \App\Models\Author::find(6);
+//    $author->delete()
+
+    return view('welcome');
+});
+
 
 Route::get('/', function () {
     return view('welcome');
