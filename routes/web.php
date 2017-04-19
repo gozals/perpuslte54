@@ -43,6 +43,18 @@ Route::get('/test', function () {
 //    $author = \App\Models\Author::find(6);
 //    $author->delete()
 
+//    $authors = \App\Models\Author::with(['books' => function($q){
+//        $q->where('amount', '>', 2);
+//    }])->get();
+
+//    foreach ($authors as $author){
+//        foreach($author->books as $book){
+//            echo $book->title.'<br>';
+//        };
+//    }
+
+//    dd($authors->toArray());
+
     return view('welcome');
 });
 
