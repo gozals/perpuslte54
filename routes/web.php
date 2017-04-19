@@ -73,7 +73,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
 Route::get('books/{book}/borrow', [
     'middleware' => ['auth'],
     'as'         => 'guest.books.borrow',
-    'uses'       => 'BooksController@borrow'
+    'uses'       => 'BookController@borrow'
 ]);
 
 
