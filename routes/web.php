@@ -76,6 +76,13 @@ Route::get('books/{book}/borrow', [
     'uses'       => 'BookController@borrow'
 ]);
 
+Route::put('books/{book}/return', [
+    'middleware' => ['auth'],
+    'as'         => 'member.books.return',
+    'uses'       => 'BookController@returnBack'
+]);
+
+
 
 
 
