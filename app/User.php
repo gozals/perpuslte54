@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\BorrowLog;
+use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -31,5 +32,10 @@ class User extends Authenticatable
     public function borrowLogs()
     {
         return $this->hasMany(BorrowLog::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
     }
 }
