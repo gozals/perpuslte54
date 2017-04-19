@@ -18,6 +18,11 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
 
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{asset('plugins/datatables/dataTables.bootstrap.css')}}">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{asset('plugins/select2/select2.min.css')}}">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -45,7 +50,7 @@
             @if (Auth::check())
               <li><a href="{{url('/home')}}">Dashboard</a></li>
               <li><a href="{{route('authors.index')}}">Penulis</a></li>
-              <li><a href="">Buku</a></li>
+              <li><a href="{{route('books.index')}}">Buku</a></li>
               <li><a href="">Member</a></li>
               <li><a href="">Peminjaman</a></li>
             @endif
@@ -145,5 +150,15 @@
 <script src="{{asset('dist/js/app.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
+
+<!-- DataTables -->
+<script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+<!-- Select2 -->
+<script src="{{asset('plugins/select2/select2.full.min.js')}}"></script>
+
+
+@yield('scripts')
+
 </body>
 </html>
