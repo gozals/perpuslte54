@@ -83,7 +83,8 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        $author = Author::find($id);
+//        $author = Author::find($id);
+        $author = Author::where('slug',$id)->first();
         return view('authors.edit')->with('author', $author);
 
     }
