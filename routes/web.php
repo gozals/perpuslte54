@@ -67,4 +67,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::resource('/authors', 'AuthorController');
+Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
+    Route::resource('authors', 'AuthorController');
+    Route::resource('books', 'BookController');
+});
+
+
+
+
+
