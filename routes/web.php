@@ -83,6 +83,12 @@ Route::put('books/{book}/return', [
     'uses'       => 'BookController@returnBack'
 ]);
 
+Route::get('statistics', [
+    'as'   => 'statistics.index',
+    'uses' => 'StatisticController@index'
+]);
+
+
 
 
 
