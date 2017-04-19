@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\BookException;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
@@ -203,4 +206,29 @@ class BookController extends Controller
         return redirect()->route('books.index');
 
     }
+
+    public function borrow($id)
+    {
+        try {
+            $book = Book::findOrFail($id);
+            Auth::user()->borrow($book);
+            Session::flash("flash_notification", [
+                "level"=>"success",
+                "message"=>"Berhasil meminjam $book->title"
+            ]);
+        } catch (BookException $e) {
+            Session::flash("flash_notification", [
+                "level"   => "danger",
+                "message" => $e->getMessage()
+            ]);
+        } catch (ModelNotFoundException $e) {
+            Session::flash("flash_notification", [
+                "level"   => "danger",
+                "message" => "Buku tidak ditemukan."
+            ]);
+        }
+
+        return redirect('/');
+    }
+
 }
