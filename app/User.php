@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Exceptions\BookException;
+use App\Models\Book;
 use App\Models\BorrowLog;
 use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
@@ -38,4 +40,21 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function borrow(Book $book)
+    {
+        // cek apakah masih ada stok buku
+        if ($book->stock < 1) {
+            throw new BookException("Buku $book->title sedang tidak tersedia.");
+        }
+
+        // cek apakah buku ini sedang dipinjam oleh user
+        if($this->borrowLogs()->where('book_id',$book->id)->where('is_returned', 0)->count() > 0 ) {
+            throw new BookException("Buku $book->title sedang Anda pinjam.");
+        }
+
+        $borrowLog = BorrowLog::create(['user_id'=>$this->id, 'book_id'=>$book->id]);
+        return $borrowLog;
+    }
+
 }
