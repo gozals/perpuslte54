@@ -68,6 +68,7 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::resource('authors', 'AuthorController');
     Route::resource('books', 'BookController');
+    Route::resource('members', 'MemberController');
 });
 
 Route::get('books/{book}/borrow', [

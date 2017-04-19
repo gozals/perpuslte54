@@ -51,7 +51,7 @@
               <li><a href="{{url('/home')}}">Dashboard</a></li>
               <li><a href="{{route('authors.index')}}">Penulis</a></li>
               <li><a href="{{route('books.index')}}">Buku</a></li>
-              <li><a href="">Member</a></li>
+              <li><a href="{{route('members.index')}}">Member</a></li>
               <li><a href="">Peminjaman</a></li>
             @endif
           </ul>
