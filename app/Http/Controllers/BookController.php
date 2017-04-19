@@ -6,6 +6,7 @@ use App\Exceptions\BookException;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
+use App\Models\BorrowLog;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -230,5 +231,26 @@ class BookController extends Controller
 
         return redirect('/');
     }
+
+    public function returnBack($book_id)
+    {
+        $borrowLog = BorrowLog::where('user_id', Auth::user()->id)
+            ->where('book_id', $book_id)
+            ->where('is_returned', 0)
+            ->first();
+
+        if ($borrowLog) {
+            $borrowLog->is_returned = true;
+            $borrowLog->save();
+
+            Session::flash("flash_notification", [
+                "level"   => "success",
+                "message" => "Berhasil mengembalikan " . $borrowLog->book->title
+            ]);
+        }
+
+        return redirect('/home');
+    }
+
 
 }
