@@ -13,9 +13,23 @@
 
     <form action="{{ route('register') }}" method="post">
       {{ csrf_field() }}
-      <div class="form-group has-feedback">
-        <input name="name" type="text" class="form-control" placeholder="Full name">
+      <div class="form-group has-feedback {{ $errors->has('username') ? ' has-error' : '' }}">
+        <input name="name" type="text" value="{{ old('name') }}" class="form-control" placeholder="Full name">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        @if ($errors->has('name'))
+          <span class="help-block">
+              <strong>{{ $errors->first('name') }}</strong>
+          </span>
+        @endif
+      </div>
+      <div class="form-group has-feedback">
+        <input name="username" type="text"  value="{{ old('username') }}" class="form-control" placeholder="Username">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        @if ($errors->has('username'))
+          <span class="help-block">
+              <strong>{{ $errors->first('username') }}</strong>
+          </span>
+        @endif
       </div>
       <div class="form-group has-feedback">
         <input name="email" type="email" class="form-control" placeholder="Email">

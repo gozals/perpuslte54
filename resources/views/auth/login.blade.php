@@ -13,12 +13,30 @@
 
     <form action="{{ route('login') }}" method="post">
       {{ csrf_field() }}
-      <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+{{--      <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
         <input name="email" type="email" class="form-control" placeholder="Email" required autofocus>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         @if ($errors->has('email'))
           <span class="help-block">
               <strong>{{ $errors->first('email') }}</strong>
+          </span>
+        @endif
+      </div>--}}
+{{--      <div class="form-group has-feedback {{ $errors->has('username') ? ' has-error' : '' }}">
+        <input name="username" type="text" class="form-control" placeholder="Username" required autofocus>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        @if ($errors->has('username'))
+          <span class="help-block">
+              <strong>{{ $errors->first('username') }}</strong>
+          </span>
+        @endif
+      </div>  --}}
+      <div class="form-group has-feedback {{ $errors->has('login') ? ' has-error' : '' }}">
+        <input name="login" type="text" class="form-control" placeholder="Username/Email" required autofocus>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        @if ($errors->has('login'))
+          <span class="help-block">
+              <strong>{{ $errors->first('login') }}</strong>
           </span>
         @endif
       </div>

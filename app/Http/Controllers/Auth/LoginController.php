@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -19,6 +20,23 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
+    public function username()
+    {
+//        return 'username';
+        return 'login';
+    }
+
+    protected function credentials(Request $request)
+    {
+        $login = $request->get('login');
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        return [
+            $field => $login,
+            'password' => $request->get('password'),
+        ];
+    }
 
     /**
      * Where to redirect users after login.
